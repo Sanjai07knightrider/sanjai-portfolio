@@ -1,36 +1,174 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Sanjai Portfolio Website
 
-## Getting Started
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Live-success?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Framework-Next.js-black?style=for-the-badge&logo=next.js" />
+  <img src="https://img.shields.io/badge/Frontend-React-blue?style=for-the-badge&logo=react" />
+  <img src="https://img.shields.io/badge/Styling-TailwindCSS-38BDF8?style=for-the-badge&logo=tailwind-css" />
+</p>
 
-First, run the development server:
+---
+
+## 🌟 Overview
+
+A premium personal portfolio built to showcase my projects, leadership experience, technical skills, achievements, and professional journey.
+
+Designed with a modern dark theme, smooth animations, interactive project showcases, and fully responsive layouts.
+
+---
+
+## 👨‍💻 About Me
+
+**Sanjai Ramanathan**
+
+🎓 B.Tech Artificial Intelligence & Data Science  
+🏫 Nandha Engineering College (2023 – 2027)
+
+💡 Passionate about:
+
+- Full Stack Development
+- Artificial Intelligence
+- Machine Learning
+- Data Analytics
+- Interactive Dashboards
+- UI/UX Design
+
+---
+
+## ✨ Features
+
+### 🎯 Modern Hero Section
+- Professional profile display
+- Animated statistics
+- Responsive layout
+
+### 🚀 Featured Projects
+- PlanOra Event Management Platform
+- Faculty LMS Dashboard
+- EV Analytics Dashboard
+- Plant Disease Detection System
+
+### 📈 Interactive Journey Timeline
+- Leadership Experience
+- Internships
+- Achievements
+- Certifications
+
+### 📬 Contact System
+- EmailJS Integration
+- Real-time Contact Form
+- Direct Email Delivery
+
+### 📱 Fully Responsive
+- Desktop Optimized
+- Tablet Friendly
+- Mobile Responsive
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+- React.js
+- Next.js
+- JavaScript
+- Tailwind CSS
+
+### Animations
+
+- Framer Motion
+- Three.js
+
+### Email Service
+
+- EmailJS
+
+### Deployment
+
+- Vercel
+
+---
+
+## 🚀 Projects Included
+
+### PlanOra
+Campus Event Management Ecosystem
+
+Features:
+
+- Event Registration
+- Faculty Approval Workflow
+- Certificate Automation
+- Analytics Dashboard
+- Notification System
+
+---
+
+### Faculty LMS
+
+Features:
+
+- Attendance Analytics
+- Student Performance Reports
+- Course Management
+- Faculty Dashboard
+
+---
+
+### EV Analytics Dashboard
+
+Features:
+
+- EV Growth Analysis
+- State-wise Insights
+- Brand Performance Tracking
+- Interactive Visualizations
+
+---
+
+### Plant Disease Detection
+
+Features:
+
+- Image Classification
+- AI Disease Detection
+- CNN-Based Model
+- Prediction Dashboard
+
+---
+
+## 📸 Screenshots
+
+### Hero Section
+
+<img width="100%" src="./public/images/profile.jpg" />
+
+---
+
+## 📬 Contact
+
+### LinkedIn
+
+www.linkedin.com/in/sanjai-ramanathan-623414353
+
+### GitHub
+
+https://github.com/Sanjai07knightrider
+
+### LeetCode
+
+https://leetcode.com/u/SANJAI_KING/
+
+### Email
+
+sanjaiking4729@gmail.com
+
+---
+
+## ⚙️ Installation
+
+Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone https://github.com/Sanjai07knightrider/sanjai-portfolio.git
