@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="width: 100%; height: 100%; display: block;">
+  <rect width="400" height="300" fill="#080503" rx="16" />
+  <defs>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6100" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#glowGrad)" rx="16" />
+  
+  
+      <!-- Brain / Neural Net -->
+      <circle cx="150" cy="150" r="8" fill="#ff6100"/>
+      <circle cx="250" cy="100" r="8" fill="#ff9a4d"/>
+      <circle cx="250" cy="150" r="8" fill="#ff9a4d"/>
+      <circle cx="250" cy="200" r="8" fill="#ff9a4d"/>
+      <circle cx="330" cy="120" r="8" fill="#ffffff"/>
+      <circle cx="330" cy="180" r="8" fill="#ffffff"/>
+      
+      <line x1="150" y1="150" x2="250" y2="100" stroke="#ff6100" stroke-width="1.5" />
+      <line x1="150" y1="150" x2="250" y2="150" stroke="#ff6100" stroke-width="1.5" />
+      <line x1="150" y1="150" x2="250" y2="200" stroke="#ff6100" stroke-width="1.5" />
+      
+      <line x1="250" y1="100" x2="330" y2="120" stroke="#ff9a4d" stroke-width="1.5" />
+      <line x1="250" y1="150" x2="330" y2="120" stroke="#ff9a4d" stroke-width="1.5" />
+      <line x1="250" y1="150" x2="330" y2="180" stroke="#ff9a4d" stroke-width="1.5" />
+      <line x1="250" y1="200" x2="330" y2="180" stroke="#ff9a4d" stroke-width="1.5" />
+      
+      <!-- Brain Silhouette Left -->
+      <path d="M90,150 C90,110 130,90 150,110 C170,90 210,110 210,150 C210,190 170,210 150,190 C130,210 90,190 90,150 Z" fill="none" stroke="#ff6100" stroke-width="1.5" stroke-dasharray="3 3"/>
+    
+
+  <!-- Banner text overlay at top -->
+  <text x="20" y="35" fill="rgba(255,255,255,0.25)" font-size="10" font-family="monospace">🏛️</text>
+  <text x="380" y="35" fill="rgba(255, 97, 0, 0.3)" font-size="10" font-family="monospace" text-anchor="end">AI LEARNING</text>
+</svg>

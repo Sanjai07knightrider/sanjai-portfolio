@@ -1,0 +1,1272 @@
+/* ══════════════════════════════════════════════════
+   PROJECTS SECTION — Premium Cinematic Portfolio
+   ══════════════════════════════════════════════════ */
+
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 140px 0;
+  background: linear-gradient(to bottom, #020203 0%, #060609 50%, #030305 100%);
+  overflow: hidden;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  z-index: 5;
+}
+
+/* Ambient glow backgrounds */
+.ambientGlowTop {
+  position: absolute;
+  top: -15%;
+  right: 10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 80, 0, 0.04) 0%, rgba(255, 80, 0, 0) 70%);
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ambientGlowBottom {
+  position: absolute;
+  bottom: -15%;
+  left: 5%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.03) 0%, rgba(0, 102, 255, 0) 70%);
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header design matching About & Journey */
+.sectionLabel {
+  font-size: 13px;
+  font-weight: 800;
+  color: #ff5000;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(255, 80, 0, 0.35);
+}
+
+.sectionHeading {
+  font-size: clamp(32px, 4.5vw, 44px);
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 40%, #a5a5b5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sectionDivider {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff5000, #ff8000);
+  border-radius: 2px;
+  margin: 20px auto 70px auto;
+  box-shadow: 0 0 15px rgba(255, 80, 0, 0.5);
+}
+
+/* 2x2 Responsive Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  width: 100%;
+}
+
+@media (max-width: 968px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Premium Project Card */
+.projectCard {
+  position: relative;
+  background: rgba(10, 10, 15, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 24px;
+  backdrop-filter: blur(28px) saturate(1.8);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.projectCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255, 80, 0, 0.15) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(255, 255, 255, 0) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(255, 80, 0, 0.35);
+  box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.9),
+              0 0 45px -2px rgba(255, 80, 0, 0.14),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.projectCard:hover::after {
+  background: linear-gradient(135deg, rgba(255, 80, 0, 0.35) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 80, 0, 0.12) 100%);
+}
+
+/* ──────────────────────────────────────────────────
+   GRAPHIC PREVIEW PANEL
+   ────────────────────────────────────────────────── */
+
+.graphicPanel {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: radial-gradient(circle at 50% 50%, #101017 0%, #07070a 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.graphicPanelOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255, 80, 0, 0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cardBadges {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.projectBadge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #ff5000;
+  background: rgba(255, 80, 0, 0.08);
+  border: 1px solid rgba(255, 80, 0, 0.25);
+  padding: 4px 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  text-shadow: 0 0 10px rgba(255, 80, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.statusBadge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.statusCompleted {
+  color: #00ff87;
+  background: rgba(0, 255, 135, 0.08);
+  border: 1px solid rgba(0, 255, 135, 0.25);
+  text-shadow: 0 0 10px rgba(0, 255, 135, 0.3);
+}
+
+.statusActive {
+  color: #00e5ff;
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+/* Corner decoration for card text region */
+.cardCornerDecoration {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid rgba(255, 80, 0, 0.4);
+  border-right: 2px solid rgba(255, 80, 0, 0.4);
+  opacity: 0.4;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+
+.projectCard:hover .cardCornerDecoration {
+  opacity: 1;
+  border-color: #ff5000;
+}
+
+/* ── Graphic 1: Planora ── */
+.graphicPlanora {
+  display: flex;
+  gap: 12px;
+  width: 90%;
+  height: 70%;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  opacity: 0.85;
+  transition: transform 0.5s ease;
+}
+
+.projectCard:hover .graphicPlanora {
+  transform: scale(1.03) translateY(-2px);
+  opacity: 1;
+}
+
+.boardColumn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 8px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 100px;
+}
+
+.columnHeader {
+  font-size: 9px;
+  color: #71717a;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.boardCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 6px;
+  font-size: 9px;
+  color: #b4b4bf;
+  position: relative;
+  overflow: hidden;
+}
+
+.cardActive {
+  background: rgba(255, 80, 0, 0.05);
+  border-color: rgba(255, 80, 0, 0.2);
+  color: #fff;
+  font-weight: 600;
+}
+
+.pulseDot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 4px;
+  height: 4px;
+  background-color: #ff5000;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ff5000;
+  animation: pulse 1.6s infinite;
+}
+
+.calendarWidget {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 8px;
+  height: 90%;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calHeader {
+  font-size: 8px;
+  font-weight: 700;
+  color: #ff5000;
+  text-align: center;
+}
+
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  flex: 1;
+}
+
+.calCell {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.calActive {
+  background: #ff5000;
+  border-color: #ff5000;
+  box-shadow: 0 0 10px rgba(255, 80, 0, 0.4);
+}
+
+/* ── Graphic 2: EV Dashboard ── */
+.graphicEv {
+  width: 90%;
+  height: 70%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  opacity: 0.85;
+  transition: transform 0.5s ease;
+}
+
+.projectCard:hover .graphicEv {
+  transform: scale(1.04);
+  opacity: 1;
+}
+
+.speedRing {
+  position: relative;
+  width: 95px;
+  height: 95px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gaugeSvg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.gaugeTrack {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.02);
+  stroke-width: 6;
+}
+
+.gaugeProgress {
+  fill: none;
+  stroke: #ff5000;
+  stroke-width: 6;
+  stroke-dasharray: 251.2;
+  stroke-dashoffset: 40; /* Represents 88% */
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(255, 80, 0, 0.5));
+}
+
+.speedVal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.speedNum {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.speedUnit {
+  font-size: 7px;
+  text-transform: uppercase;
+  color: #71717a;
+  letter-spacing: 0.08em;
+  margin-top: 1px;
+}
+
+.chartWidget {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 8px;
+  width: 130px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chartSvg {
+  width: 100%;
+  height: 48px;
+  overflow: visible;
+}
+
+.chartLabel {
+  font-size: 8px;
+  color: #71717a;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ── Graphic 3: Faculty LMS ── */
+.graphicLms {
+  width: 90%;
+  height: 70%;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  opacity: 0.85;
+  transition: transform 0.5s ease;
+}
+
+.projectCard:hover .graphicLms {
+  transform: scale(1.03) translateY(-1px);
+  opacity: 1;
+}
+
+.studentList {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 8px;
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 160px;
+}
+
+.studentRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 4px 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.avatar {
+  font-size: 10px;
+}
+
+.studentInfo {
+  flex: 1;
+}
+
+.studentName {
+  font-size: 9px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.studentStatus {
+  font-size: 7px;
+  color: #71717a;
+}
+
+.gradeBadge {
+  font-size: 8px;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.gradeA {
+  background: rgba(255, 80, 0, 0.1);
+  color: #ff5000;
+  border: 1px solid rgba(255, 80, 0, 0.2);
+}
+
+.gradePending {
+  background: rgba(255, 255, 255, 0.03);
+  color: #71717a;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.progressWidget {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 8px 10px;
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  max-width: 100px;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 7px;
+  color: #71717a;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.progressBar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff5000, #ff8000);
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(255, 80, 0, 0.6);
+}
+
+/* ── Graphic 4: Plant Disease ── */
+.graphicPlant {
+  width: 90%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  position: relative;
+  opacity: 0.85;
+  transition: transform 0.5s ease;
+}
+
+.projectCard:hover .graphicPlant {
+  transform: scale(1.04);
+  opacity: 1;
+}
+
+.leafScanner {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border: 1px dashed rgba(255, 80, 0, 0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.leafSvg {
+  width: 60%;
+  height: 60%;
+  filter: drop-shadow(0 0 6px rgba(255, 80, 0, 0.25));
+}
+
+.scanLine {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff5000, transparent);
+  box-shadow: 0 0 8px #ff5000;
+  animation: scanner 2.2s ease-in-out infinite;
+}
+
+/* Scanning box HUD target corners */
+.scanTargetCornerTL, .scanTargetCornerTR, .scanTargetCornerBL, .scanTargetCornerBR {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: #ff5000;
+  border-style: solid;
+  opacity: 0.7;
+}
+
+.scanTargetCornerTL { top: 6px; left: 6px; border-width: 1.5px 0 0 1.5px; border-radius: 2px 0 0 0; }
+.scanTargetCornerTR { top: 6px; right: 6px; border-width: 1.5px 1.5px 0 0; border-radius: 0 2px 0 0; }
+.scanTargetCornerBL { bottom: 6px; left: 6px; border-width: 0 0 1.5px 1.5px; border-radius: 0 0 0 2px; }
+.scanTargetCornerBR { bottom: 6px; right: 6px; border-width: 0 1.5px 1.5px 0; border-radius: 0 0 2px 0; }
+
+.diagnosticsOverlay {
+  background: rgba(255, 80, 0, 0.05);
+  border: 1px solid rgba(255, 80, 0, 0.2);
+  border-radius: 12px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 120px;
+  backdrop-filter: blur(8px);
+}
+
+.diagTitle {
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.diagConfidence {
+  font-size: 8px;
+  color: #ff5000;
+  font-weight: 600;
+  margin-top: 1px;
+}
+
+
+/* ──────────────────────────────────────────────────
+   TEXT INFO PANEL
+   ────────────────────────────────────────────────── */
+
+.infoPanel {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.titleRow {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.projectTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.projectTagline {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ff5000;
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+}
+
+.projectDescription {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #a5a5b5;
+  margin-bottom: 20px;
+}
+
+/* Key Details Bullet List */
+.detailsList {
+  list-style: none;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detailItem {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #8a8a9e;
+}
+
+.bulletSymbol {
+  color: #ff5000;
+  font-size: 10px;
+  margin-top: 2px;
+  text-shadow: 0 0 10px rgba(255, 80, 0, 0.4);
+}
+
+/* Tech tag badges */
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  margin-bottom: 24px;
+}
+
+.techTag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #b4b4bf;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4px 10px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.projectCard:hover .techTag {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.techTag:hover {
+  color: #fff;
+  border-color: rgba(255, 80, 0, 0.3) !important;
+  background: rgba(255, 80, 0, 0.05) !important;
+  box-shadow: 0 0 12px rgba(255, 80, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+/* Action Button Links */
+.actionRow {
+  display: flex;
+  gap: 12px;
+}
+
+.actionBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.btnIcon {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.3s ease;
+}
+
+.githubBtn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #d1d1db;
+}
+
+.githubBtn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.githubBtn:hover .btnIcon {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+.previewBtn {
+  background: linear-gradient(135deg, #ff5000 0%, #d83a00 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 80, 0, 0.15);
+  box-shadow: 0 4px 15px rgba(255, 80, 0, 0.15);
+}
+
+.previewBtn:hover {
+  background: linear-gradient(135deg, #ff6015 0%, #e8450a 100%);
+  box-shadow: 0 6px 20px rgba(255, 80, 0, 0.3);
+  border-color: rgba(255, 80, 0, 0.3);
+}
+
+.previewBtn:hover .btnIcon {
+  transform: scale(1.15);
+}
+
+/* ──────────────────────────────────────────────────
+   ANIMATIONS
+   ────────────────────────────────────────────────── */
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 80, 0, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 5px rgba(255, 80, 0, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 80, 0, 0);
+  }
+}
+
+@keyframes scanner {
+  0% {
+    top: -2%;
+  }
+  50% {
+    top: 98%;
+  }
+  100% {
+    top: -2%;
+  }
+}
+
+/* ──────────────────────────────────────────────────
+   PROJECT PREVIEW MODAL STYLING
+   ────────────────────────────────────────────────── */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 2, 3, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  max-height: 90vh;
+  background: linear-gradient(145deg, rgba(10, 10, 15, 0.96) 0%, rgba(5, 5, 8, 0.98) 100%);
+  border: 1px solid rgba(255, 80, 0, 0.22);
+  border-radius: 24px;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.85),
+    0 0 50px rgba(255, 80, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow-y: auto;
+  animation: modalScaleUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.modalClose {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.modalClose:hover {
+  background: rgba(255, 80, 0, 0.15);
+  border-color: rgba(255, 80, 0, 0.40);
+  transform: rotate(90deg);
+}
+
+.modalGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  width: 100%;
+  min-height: 500px;
+}
+
+/* Left Column: Carousel & Tech */
+.modalLeftCol {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.carouselContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.carouselViewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #050508;
+  border: 1px solid rgba(255, 80, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.carouselImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: rgba(5, 5, 8, 0.95);
+  padding: 16px;
+  box-sizing: border-box;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carouselViewport:hover .carouselImg {
+  transform: scale(1.05);
+}
+
+.carouselOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+  padding: 20px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.slideName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.carouselControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.carouselBtn {
+  background: rgba(255, 80, 0, 0.08);
+  border: 1px solid rgba(255, 80, 0, 0.25);
+  color: #ff8000;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.carouselBtn:hover {
+  background: rgba(255, 80, 0, 0.2);
+  border-color: rgba(255, 80, 0, 0.5);
+  color: #ffffff;
+}
+
+.carouselDots {
+  display: flex;
+  gap: 8px;
+}
+
+.carouselDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.carouselDotActive {
+  background: #ff5000;
+  transform: scale(1.3);
+  box-shadow: 0 0 8px rgba(255, 80, 0, 0.6);
+}
+
+.modalTechSection {
+  margin-top: 30px;
+}
+
+.modalTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.modalTag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffa060;
+  background: rgba(255, 80, 0, 0.06);
+  border: 1px solid rgba(255, 80, 0, 0.2);
+  padding: 4px 12px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* Right Column: Details */
+.modalRightCol {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.badgeRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.modalBadge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ff5000;
+  background: rgba(255, 80, 0, 0.08);
+  border: 1px solid rgba(255, 80, 0, 0.25);
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.modalTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.modalSubtitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #8a8a9e;
+  margin-top: 4px;
+}
+
+.modalContentBody {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modalSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modalSectionTitle {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ff5000;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.modalText {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #b4b4bf;
+  margin: 0;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: #b4b4bf;
+}
+
+.featureCheck {
+  color: #00ff87;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.improvementDot {
+  color: #00e5ff;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.modalFooter {
+  margin-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.modalGithubBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.modalGithubBtn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 80, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(255, 80, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.modalGithubBtn:hover .btnIcon {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+/* Animations & Responsive */
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalScaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 900px) {
+  .modal {
+    max-width: 95%;
+    max-height: 95vh;
+  }
+
+  .modalGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .modalLeftCol {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 24px;
+  }
+
+  .modalRightCol {
+    padding: 24px;
+    max-height: 60vh;
+  }
+}
+
+.modalMetricsSection {
+  margin-top: 24px;
+}
+
+.modalMetrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.modalMetricBadge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffa060;
+  background: rgba(255, 80, 0, 0.06);
+  border: 1px solid rgba(255, 80, 0, 0.2);
+  padding: 4px 12px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* Fallback image placeholder card styling */
+.imageFallbackPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(16, 10, 15, 0.95), rgba(8, 8, 12, 0.98));
+  border: 1.5px solid rgba(255, 80, 0, 0.3);
+  box-shadow: 0 0 30px rgba(255, 80, 0, 0.15), inset 0 0 15px rgba(255, 80, 0, 0.05);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.fallbackContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.fallbackIcon {
+  font-size: 48px;
+  filter: drop-shadow(0 0 10px rgba(255, 80, 0, 0.4));
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.fallbackTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.fallbackMsg {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ff8000;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 4px 0 0 0;
+  text-shadow: 0 0 8px rgba(255, 80, 0, 0.3);
+}

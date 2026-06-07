@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="width: 100%; height: 100%; display: block;">
+  <rect width="400" height="300" fill="#080503" rx="16" />
+  <defs>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6100" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#glowGrad)" rx="16" />
+  
+  
+      <!-- Code Console / database view -->
+      <rect x="80" y="70" width="240" height="150" fill="none" stroke="#ff6100" stroke-width="2" rx="8"/>
+      <rect x="90" y="80" width="220" height="130" fill="#000" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1" rx="4"/>
+      <text x="105" y="105" fill="#39ff14" font-size="10" font-family="monospace">&gt; npm run start:dev</text>
+      <text x="105" y="125" fill="#ffffff" font-size="10" font-family="monospace">[Server] Running on port 5000</text>
+      <text x="105" y="145" fill="#ffffff" font-size="10" font-family="monospace">[DB] Connected to MongoDB Atlas</text>
+      <text x="105" y="165" fill="#ff9a4d" font-size="10" font-family="monospace">GET /api/v1/users 200 OK - 42ms</text>
+      <text x="105" y="185" fill="#ff6100" font-size="10" font-family="monospace">POST /api/v1/auth/login 201 Created</text>
+    
+
+  <!-- Banner text overlay at top -->
+  <text x="20" y="35" fill="rgba(255,255,255,0.25)" font-size="10" font-family="monospace">💻</text>
+  <text x="380" y="35" fill="rgba(255, 97, 0, 0.3)" font-size="10" font-family="monospace" text-anchor="end">PROJECT SCREENSHOTS</text>
+</svg>

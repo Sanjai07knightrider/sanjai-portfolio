@@ -1,0 +1,1460 @@
+/* ══════════════════════════════════════════════════
+   JOURNEY SECTION — Vertical Timeline + Story Modal
+   ══════════════════════════════════════════════════ */
+
+.section {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(180deg, #060609 0%, #07070d 50%, #060609 100%);
+  padding: 120px 0 100px;
+  overflow: hidden;
+}
+
+.ambientGlow {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 97, 0, 0.05) 0%, transparent 65%);
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+/* ── Labels */
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #ff7828;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.sectionHeading {
+  font-size: 48px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+
+.sectionDivider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6100, #ff9a4d);
+  border-radius: 2px;
+  margin-bottom: 70px;
+}
+
+/* ══════════════════════════
+   TIMELINE
+   ══════════════════════════ */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 76px;
+  margin-bottom: 70px;
+}
+
+/* Center spine */
+.spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, rgba(255, 97, 0, 0.08) 0%, rgba(255, 97, 0, 0.35) 30%, rgba(255, 97, 0, 0.35) 70%, rgba(255, 97, 0, 0.08) 100%);
+}
+
+/* ── Timeline grid item row */
+.timelineItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1fr);
+  align-items: center;
+  gap: 0;
+}
+
+/* Slot Containers */
+.leftSlot {
+  grid-column: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.centerSlot {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightSlot {
+  grid-column: 3;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Inner slot alignments & margins */
+.leftSlot .milestoneCard {
+  margin-right: 24px;
+  text-align: right;
+}
+
+.rightSlot .milestoneCard {
+  margin-left: 24px;
+  text-align: left;
+}
+
+/* Keep left connector exactly as it was: card right edge to node */
+.leftSlot .milestoneCard::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -44px;
+  width: 44px;
+  height: 2px;
+  background: rgba(255, 97, 0, 0.35);
+  box-shadow: 0 0 8px rgba(255, 97, 0, 0.4);
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Right-side connector inside grid row timeline container */
+.right .connector {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 50%;
+  width: 64px;
+  height: 2px;
+  background: rgba(255, 97, 0, 0.45);
+  box-shadow: 0 0 10px rgba(255, 97, 0, 0.45);
+  z-index: 0;
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Hide right-side connector placeholder inside left milestones */
+.left .connector {
+  display: none;
+}
+
+/* Node Wrap */
+.nodeWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nodeGlow {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 97, 0, 0.20) 0%, transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+  animation: glowPulse 8s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+.node {
+  position: relative;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(28, 16, 8, 0.95), rgba(14, 8, 4, 0.98));
+  border: 2px solid rgba(255, 97, 0, 0.40);
+  box-shadow:
+    inset 0 0 8px rgba(255, 97, 0, 0.3),
+    0 0 15px rgba(255, 97, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  animation: nodePulse 8s ease-in-out infinite;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes nodePulse {
+  0%, 100% {
+    box-shadow:
+      0 0 12px rgba(255, 97, 0, 0.3),
+      inset 0 0 6px rgba(255, 97, 0, 0.2);
+    border-color: rgba(255, 97, 0, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 24px rgba(255, 97, 0, 0.65),
+      inset 0 0 12px rgba(255, 97, 0, 0.4);
+    border-color: rgba(255, 97, 0, 0.7);
+  }
+}
+
+/* Hover glowing states for node icon and connector lines */
+.timelineItem:has(.milestoneCard:hover) .node {
+  animation: nodeHoverPulse 1.2s ease-in-out infinite;
+  border-color: #ff6100;
+  box-shadow: 0 0 25px rgba(255, 97, 0, 0.7);
+}
+
+@keyframes nodeHoverPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(255, 97, 0, 0.4);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 25px rgba(255, 97, 0, 0.75);
+  }
+}
+
+.leftSlot .milestoneCard:hover::after,
+.timelineItem.right:has(.milestoneCard:hover) .connector {
+  background: rgba(255, 97, 0, 0.85);
+  box-shadow: 0 0 12px rgba(255, 97, 0, 0.85);
+}
+
+/* Milestone card core */
+.milestoneCard {
+  position: relative;
+  background: linear-gradient(145deg, rgba(22, 14, 8, 0.85) 0%, rgba(12, 8, 4, 0.92) 100%);
+  border: 1px solid rgba(255, 97, 0, 0.14);
+  border-radius: 16px;
+  padding: 24px 26px;
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 200, 130, 0.07);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
+  width: 100%;
+  max-width: 420px;
+  cursor: pointer;
+}
+
+.milestoneCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 97, 0, 0.45);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.65),
+    0 0 25px rgba(255, 97, 0, 0.18),
+    inset 0 1px 0 rgba(255, 200, 130, 0.10);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.cardCategory {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  color: #ff9a50;
+  background: rgba(255, 97, 0, 0.08);
+  border: 1px solid rgba(255, 97, 0, 0.22);
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.orgBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.orgDot {
+  width: 6px;
+  height: 6px;
+  background-color: #ff7828;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ff6100;
+}
+
+.orgText {
+  font-size: 11px;
+  font-weight: 600;
+  color: #a0a0b8;
+  letter-spacing: 0.2px;
+}
+
+/* Card highlights */
+.cardHighlightStrong {
+  border-color: rgba(255, 97, 0, 0.35);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 0 25px rgba(255, 97, 0, 0.15),
+    inset 0 1px 0 rgba(255, 200, 130, 0.08);
+}
+
+.cardHighlightStrong:hover {
+  border-color: rgba(255, 97, 0, 0.6);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.65),
+    0 0 35px rgba(255, 97, 0, 0.30),
+    inset 0 1px 0 rgba(255, 200, 130, 0.12);
+}
+
+.cardHighlightMedium {
+  border-color: rgba(255, 97, 0, 0.22);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 0 15px rgba(255, 97, 0, 0.08),
+    inset 0 1px 0 rgba(255, 200, 130, 0.07);
+}
+
+.cardYear {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ff7828;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+}
+
+.cardSubtitle {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6e6e85;
+  margin-bottom: 10px;
+  letter-spacing: 0.2px;
+}
+
+.cardDesc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #9090a8;
+}
+
+/* Subtle View Details Indicator */
+.cardDetailsIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ff7828;
+  opacity: 0.6;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 18px;
+  transition: all 0.3s ease;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.milestoneCard:hover .cardDetailsIndicator {
+  color: #ff9a50;
+  opacity: 1;
+}
+
+.milestoneCard:hover .cardDetailsIndicator .arrow {
+  transform: translateX(4px);
+}
+
+/* ══════════════════════════
+   CERT BADGE (Explore Credentials)
+   ══════════════════════════ */
+.certBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding: 36px 48px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(22, 14, 8, 0.80), rgba(12, 8, 4, 0.90));
+  border: 1px solid rgba(255, 97, 0, 0.20);
+  backdrop-filter: blur(24px);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.55),
+    0 0 20px rgba(255, 97, 0, 0.08),
+    inset 0 1px 0 rgba(255, 200, 130, 0.08);
+}
+
+.certBadgeInner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.certIcon {
+  font-size: 36px;
+}
+
+.certText {
+  display: flex;
+  flex-direction: column;
+}
+
+.certCount {
+  font-size: 19px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+}
+
+.certDesc {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6e6e85;
+  margin-top: 2px;
+}
+
+.certBtn {
+  padding: 14px 28px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ff6100, #ff8c30);
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255, 97, 0, 0.35);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.3px;
+}
+
+.certBtn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(255, 97, 0, 0.50);
+}
+
+/* ══════════════════════════
+   CERTIFICATIONS CREDENTIALS MODAL
+   ══════════════════════════ */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 2, 3, 0.90);
+  backdrop-filter: blur(20px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal {
+  width: 100%;
+  max-width: 950px; /* Wider for 2-column gallery */
+  background: linear-gradient(145deg, rgba(18, 12, 8, 0.96) 0%, rgba(10, 6, 3, 0.98) 100%);
+  border: 1px solid rgba(255, 97, 0, 0.22);
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.85),
+    0 0 40px rgba(255, 97, 0, 0.10),
+    inset 0 1px 0 rgba(255, 200, 130, 0.10);
+  position: relative;
+  animation: modalScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 97, 0, 0.10);
+  padding-bottom: 14px;
+}
+
+.modalTitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.modalSubtitle {
+  font-size: 12.5px;
+  color: #a0a0c0;
+  margin-top: 4px;
+}
+
+.modalClose {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.modalClose:hover {
+  background: rgba(255, 97, 0, 0.15);
+  border-color: rgba(255, 97, 0, 0.40);
+  transform: rotate(90deg);
+}
+
+/* Modal Grid */
+.modalGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  width: 100%;
+}
+
+.modalCarouselCol {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px;
+  border-right: 1px solid rgba(255, 97, 0, 0.1);
+}
+
+.certCard {
+  background: linear-gradient(145deg, rgba(28, 18, 10, 0.90), rgba(16, 10, 5, 0.95));
+  border: 1px solid rgba(255, 97, 0, 0.18);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.certPreview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #080503;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.certPreviewImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.certCategoryTag {
+  display: inline-block;
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #ff9a50;
+  background: rgba(255, 97, 0, 0.08);
+  border: 1px solid rgba(255, 97, 0, 0.2);
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  align-self: flex-start;
+}
+
+.certCardBody {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.certTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+
+.certOrg {
+  font-size: 12px;
+  color: #6e6e85;
+}
+
+.modalDetailsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px 24px;
+}
+
+.modalDetailsDesc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #c8c8dc;
+  margin: 0;
+}
+
+.modalDetailsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modalDetailsHeading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ff7828;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.modalHighlightsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modalHighlightItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #a0a0c0;
+}
+
+.modalHighlightCheck {
+  color: #ff9a50;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.modalCategoriesRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.modalCategoryBadge {
+  font-size: 10px;
+  font-weight: 600;
+  color: #88889c;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.2px;
+  transition: all 0.3s ease;
+}
+
+.modalCategoryBadgeActive {
+  color: #ffa060;
+  background: rgba(255, 97, 0, 0.08);
+  border-color: rgba(255, 97, 0, 0.3);
+  box-shadow: 0 0 10px rgba(255, 97, 0, 0.1);
+}
+
+.modalProgressSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid rgba(255, 97, 0, 0.1);
+  padding-top: 16px;
+}
+
+.modalJourneyBadge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 97, 0, 0.2) 0%, rgba(255, 154, 80, 0.1) 100%);
+  border: 1px solid rgba(255, 97, 0, 0.35);
+  padding: 4px 12px;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* Carousel Navigation */
+.carouselNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.navBtn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #c8c8dc;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.navBtn:hover {
+  background: rgba(255, 97, 0, 0.10);
+  border-color: rgba(255, 97, 0, 0.35);
+  color: #ff9a50;
+}
+
+.navDots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+
+.dotActive {
+  background: #ff7828;
+  transform: scale(1.3);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalScaleUp {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ══════════════════════════
+   JOURNEY STORY MODAL OVERLAY (Fullscreen Documentary)
+   ══════════════════════════ */
+.storyModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 2, 3, 0.90);
+  backdrop-filter: blur(24px);
+  z-index: 2500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  animation: modalFadeIn 0.35s ease-out;
+}
+
+.storyModal {
+  position: relative;
+  width: 100%;
+  max-width: 1050px;
+  max-height: 90vh;
+  background: linear-gradient(145deg, rgba(16, 10, 6, 0.96) 0%, rgba(8, 5, 3, 0.98) 100%);
+  border: 1px solid rgba(255, 97, 0, 0.25);
+  border-radius: 24px;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.85),
+    0 0 50px rgba(255, 97, 0, 0.12),
+    inset 0 1px 0 rgba(255, 200, 130, 0.08);
+  overflow-y: auto;
+  animation: modalScaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Soft ambient glow inside story modal */
+.storyModal::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 97, 0, 0.08) 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.storyModalHeader {
+  position: relative;
+  z-index: 1;
+  padding: 20px 28px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 97, 0, 0.1);
+}
+
+.storyCategory {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #ff9a50;
+  background: rgba(255, 97, 0, 0.1);
+  border: 1px solid rgba(255, 97, 0, 0.3);
+  padding: 3px 12px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.storyTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  margin: 4px 0;
+}
+
+.modalOrgBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin: 6px 0 8px;
+}
+
+.modalOrgPin {
+  font-size: 12px;
+}
+
+.modalOrgText {
+  font-size: 11px;
+  font-weight: 600;
+  color: #a0a0b8;
+  letter-spacing: 0.2px;
+}
+
+.storyYear {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff7828;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.storyModalClose {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.storyModalClose:hover {
+  background: rgba(255, 97, 0, 0.2);
+  border-color: rgba(255, 97, 0, 0.5);
+  transform: rotate(90deg);
+}
+
+/* Two-column layout */
+.storyGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  flex-grow: 1;
+}
+
+/* Left Column: Carousel */
+.carouselCol {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 28px;
+  border-right: 1px solid rgba(255, 97, 0, 0.1);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.graphicViewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #080503;
+  border: 1px solid rgba(255, 97, 0, 0.15);
+}
+
+.carouselImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 15px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.graphicViewport:hover .carouselImg {
+  transform: scale(1.08);
+}
+
+.certImg {
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: 12px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.graphicViewport:hover .carouselImg.certImg {
+  transform: none !important;
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.graphicViewport:hover .carouselImg.projectImage {
+  transform: none !important;
+}
+
+.imageFallbackPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(20, 12, 8, 0.95), rgba(8, 5, 3, 0.98));
+  border: 1.5px solid rgba(255, 97, 0, 0.35);
+  box-shadow: 0 0 30px rgba(255, 97, 0, 0.15), inset 0 0 15px rgba(255, 97, 0, 0.05);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.fallbackIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 10px rgba(255, 97, 0, 0.4));
+}
+
+.fallbackTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+
+.fallbackMsg {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ff9a50;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 4px;
+}
+
+/* Slide overlay */
+.slideTextOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 70%, transparent 100%);
+  padding: 24px;
+  z-index: 2;
+}
+
+.slideTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+
+.slideDesc {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #b0b0c8;
+}
+
+/* Controls */
+.slideControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.slideBtn {
+  background: rgba(255, 97, 0, 0.1);
+  border: 1px solid rgba(255, 97, 0, 0.25);
+  color: #ff9a50;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.slideBtn:hover {
+  background: rgba(255, 97, 0, 0.25);
+  border-color: rgba(255, 97, 0, 0.6);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.slideDots {
+  display: flex;
+  gap: 8px;
+}
+
+.slideDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.slideDotActive {
+  background: #ff7828;
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(255, 97, 0, 0.6);
+}
+
+/* Right Column: Details */
+.detailsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 28px;
+}
+
+.detailsDesc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #c8c8dc;
+  margin: 0;
+}
+
+.personalTouchText {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #b0b0c8;
+  margin: 0;
+}
+
+.detailsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detailsHeading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ff7828;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Highlights List */
+.highlightsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.highlightItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #a0a0c0;
+}
+
+.highlightCheck {
+  color: #ff9a50;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+/* Tech Tags Row */
+.techTagsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.techTag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffa060;
+  background: rgba(255, 97, 0, 0.08);
+  border: 1px solid rgba(255, 97, 0, 0.22);
+  padding: 4px 12px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* Journey Progress Section */
+.journeyProgressSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 97, 0, 0.1);
+  padding-top: 20px;
+}
+
+.journeyBadge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 97, 0, 0.2) 0%, rgba(255, 154, 80, 0.1) 100%);
+  border: 1px solid rgba(255, 97, 0, 0.35);
+  padding: 6px 16px;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* View Certificate Button */
+.viewCertBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  padding: 10px 20px;
+  background: rgba(255, 97, 0, 0.12);
+  border: 1px solid rgba(255, 97, 0, 0.35);
+  color: #ff9a50;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.viewCertBtn:hover {
+  background: rgba(255, 97, 0, 0.25);
+  border-color: rgba(255, 97, 0, 0.6);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 97, 0, 0.2);
+}
+
+/* ══════════════════════════
+   RESPONSIVE OVERRIDES
+   ══════════════════════════ */
+@media (max-width: 900px) {
+  .timeline {
+    gap: 48px;
+  }
+
+  .timelineItem {
+    grid-template-columns: 64px 1fr;
+    gap: 0;
+    align-items: center;
+  }
+
+  /* Left card and Right card slots will now take column 2 */
+  .timelineItem.left .leftSlot,
+  .timelineItem.right .rightSlot {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex !important;
+    justify-content: flex-start !important;
+    width: 100%;
+  }
+
+  /* Hide empty slots on mobile */
+  .timelineItem.left .rightSlot,
+  .timelineItem.right .leftSlot {
+    display: none;
+  }
+
+  .timelineItem.left .centerSlot,
+  .timelineItem.right .centerSlot {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+  }
+
+  .milestoneCard {
+    max-width: none !important;
+    width: auto !important;
+    padding: 20px 24px !important;
+  }
+
+  .leftSlot .milestoneCard,
+  .rightSlot .milestoneCard {
+    margin: 0 16px 0 8px !important;
+    text-align: left !important;
+  }
+
+  /* Mobile Connector Pseudo-element */
+  .nodeWrap::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px !important;
+    height: 2px !important;
+    transform: translateY(-50%);
+    background: rgba(255, 97, 0, 0.45) !important;
+    box-shadow: 0 0 8px rgba(255, 97, 0, 0.35) !important;
+    display: block !important;
+    z-index: 0;
+    pointer-events: none;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .timelineItem:has(.milestoneCard:hover) .nodeWrap::after {
+    background: rgba(255, 97, 0, 0.85) !important;
+    box-shadow: 0 0 12px rgba(255, 97, 0, 0.85) !important;
+  }
+
+  .nodeWrap {
+    padding-top: 0;
+    align-items: center;
+  }
+
+  .leftSlot .milestoneCard::after,
+  .connector {
+    display: none !important;
+  }
+
+  .spine {
+    left: 32px;
+  }
+
+  .sectionHeading { font-size: 38px; }
+
+  /* Modal responsive layout changes */
+  .storyModal {
+    max-width: 95%;
+    max-height: 95vh;
+  }
+
+  .storyGrid {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+
+  .carouselCol {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 97, 0, 0.1);
+    padding: 24px;
+  }
+
+  .detailsCol {
+    padding: 24px;
+  }
+
+  /* Credentials Modal responsive layout changes */
+  .modal {
+    max-width: 95% !important;
+    max-height: 95vh !important;
+    overflow-y: auto;
+  }
+
+  .modalGrid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .modalCarouselCol {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 97, 0, 0.1);
+    padding: 16px 0 24px 0 !important;
+  }
+
+  .modalDetailsCol {
+    padding: 16px 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 80px 0 70px; }
+  .container { padding: 0 24px; }
+  .sectionHeading { font-size: 30px; }
+  .certBadge { padding: 24px; flex-direction: column; text-align: center; }
+  .modal { padding: 24px; }
+
+  /* Mobile-specific adjustments below 768px */
+  .milestoneCard {
+    padding: 20px 20px !important;
+  }
+
+  .cardTitle {
+    font-size: 22px !important;
+    line-height: 1.35 !important;
+    margin-bottom: 6px !important;
+  }
+
+  .cardSubtitle {
+    font-size: 15px !important;
+    line-height: 1.45 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .cardDesc {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Journey slide caption layout below image on mobile */
+  .graphicViewport {
+    aspect-ratio: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background: transparent !important;
+    border: none !important;
+    overflow: visible !important;
+  }
+
+  .carouselImg {
+    aspect-ratio: 4 / 3 !important;
+    height: auto !important;
+    width: 100% !important;
+    border: 1px solid rgba(255, 97, 0, 0.15);
+    background: #080503;
+    border-radius: 16px !important;
+  }
+
+  .imageFallbackPlaceholder {
+    aspect-ratio: 4 / 3 !important;
+    height: auto !important;
+  }
+
+  .slideTextOverlay {
+    position: relative !important;
+    background: rgba(18, 10, 6, 0.45) !important;
+    border: 1px solid rgba(255, 97, 0, 0.15) !important;
+    border-radius: 12px !important;
+    padding: 14px 16px !important;
+    margin-top: 14px !important;
+    z-index: 1 !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .slideTitle {
+    font-size: 15px !important;
+    color: #ffffff !important;
+    margin-bottom: 4px !important;
+  }
+
+  .slideDesc {
+    font-size: 12px !important;
+    color: #a0a0c0 !important;
+    line-height: 1.5 !important;
+  }
+
+  .slideControls {
+    margin-top: 14px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .storyModalHeader {
+    padding: 16px 20px;
+  }
+
+  .storyTitle {
+    font-size: 20px;
+  }
+
+  .carouselCol, .detailsCol {
+    padding: 16px;
+  }
+
+  .slideBtn {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
+}

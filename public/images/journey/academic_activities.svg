@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="width: 100%; height: 100%; display: block;">
+  <rect width="400" height="300" fill="#080503" rx="16" />
+  <defs>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6100" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#glowGrad)" rx="16" />
+  
+  
+      <!-- Atom/Science Activity -->
+      <circle cx="200" cy="150" r="30" fill="rgba(255, 97, 0, 0.1)" stroke="#ff6100" stroke-width="2.5"/>
+      <ellipse cx="200" cy="150" rx="90" ry="30" fill="none" stroke="#ff9a4d" stroke-width="1.5" transform="rotate(30 200 150)"/>
+      <ellipse cx="200" cy="150" rx="90" ry="30" fill="none" stroke="#ff9a4d" stroke-width="1.5" transform="rotate(-30 200 150)"/>
+      <circle cx="122" cy="105" r="6" fill="#ff6100"/>
+      <circle cx="278" cy="195" r="6" fill="#ff6100"/>
+      <circle cx="122" cy="195" r="6" fill="#ff9a4d"/>
+      <circle cx="278" cy="105" r="6" fill="#ff9a4d"/>
+      <circle cx="200" cy="150" r="8" fill="#ffffff" />
+    
+
+  <!-- Banner text overlay at top -->
+  <text x="20" y="35" fill="rgba(255,255,255,0.25)" font-size="10" font-family="monospace">🏫</text>
+  <text x="380" y="35" fill="rgba(255, 97, 0, 0.3)" font-size="10" font-family="monospace" text-anchor="end">ACADEMIC ACTIVITIES</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="width: 100%; height: 100%; display: block;">
+  <rect width="400" height="300" fill="#080503" rx="16" />
+  <defs>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6100" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#glowGrad)" rx="16" />
+  
+  
+      <!-- Trophy Cup -->
+      <circle cx="200" cy="150" r="100" stroke="rgba(255, 97, 0, 0.15)" stroke-width="1" stroke-dasharray="4 4" />
+      <path d="M160,90 H240 V150 C240,175 220,185 200,185 C180,185 160,175 160,150 Z" stroke="#ff6100" stroke-width="2" fill="rgba(255, 97, 0, 0.05)"/>
+      <path d="M200,185 V215 M180,215 H220" stroke="#ff6100" stroke-width="2"/>
+      <path d="M160,105 H140 V135 H160" stroke="#ff9a4d" stroke-width="2" fill="none"/>
+      <path d="M240,105 H260 V135 H240" stroke="#ff9a4d" stroke-width="2" fill="none"/>
+      <polygon points="200,100 205,112 217,112 208,120 211,132 200,124 189,132 192,120 183,112 195,112" fill="#ff9a4d"/>
+    
+
+  <!-- Banner text overlay at top -->
+  <text x="20" y="35" fill="rgba(255,255,255,0.25)" font-size="10" font-family="monospace">🏆</text>
+  <text x="380" y="35" fill="rgba(255, 97, 0, 0.3)" font-size="10" font-family="monospace" text-anchor="end">MERIT ACHIEVEMENTS</text>
+</svg>
